@@ -206,7 +206,7 @@ func (d *Service) CreateUserGuest(ctx context.Context, userName string) (*thunde
 		return nil, fmt.Errorf("create guest user query error: %v", err)
 	}
 
-	return &thunderdome.User{ID: userID, Name: userName, Avatar: "robohash", NotificationsEnabled: true, Locale: "en", GravatarHash: db.CreateGravatarHash(userID), Type: thunderdome.GuestUserType}, nil
+	return &thunderdome.User{ID: userID, Name: userName, Avatar: "robohash", NotificationsEnabled: true, Locale: "pt", GravatarHash: db.CreateGravatarHash(userID), Type: thunderdome.GuestUserType}, nil
 }
 
 // CreateUserRegistered adds a new registered user
