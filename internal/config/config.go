@@ -15,8 +15,8 @@ func InitConfig(logger *otelzap.Logger) Config {
 	viper.SetConfigName("config")
 	viper.SetConfigType("yaml")
 
-	viper.AddConfigPath("/etc/thunderdome/")
-	viper.AddConfigPath("$HOME/.config/thunderdome/")
+	viper.AddConfigPath("/etc/thunderweb/")
+	viper.AddConfigPath("$HOME/.config/thunderweb/")
 	viper.AddConfigPath(".")
 
 	viper.SetDefault("http.cookie_hashkey", defaultHTTPCookieHashkey)
@@ -39,7 +39,7 @@ func InitConfig(logger *otelzap.Logger) Config {
 	viper.SetDefault("http.websocket_subdomain", "")
 
 	viper.SetDefault("otel.enabled", false)
-	viper.SetDefault("otel.service_name", "thunderdome")
+	viper.SetDefault("otel.service_name", "thunderweb")
 	viper.SetDefault("otel.collector_url", "localhost:4317")
 	viper.SetDefault("otel.insecure_mode", false)
 
@@ -47,7 +47,7 @@ func InitConfig(logger *otelzap.Logger) Config {
 	viper.SetDefault("db.port", 5432)
 	viper.SetDefault("db.user", defaultDBUser)
 	viper.SetDefault("db.pass", defaultDBPass)
-	viper.SetDefault("db.name", "thunderdome")
+	viper.SetDefault("db.name", "thunderweb")
 	viper.SetDefault("db.sslmode", "disable")
 	viper.SetDefault("db.max_open_conns", 25)
 	viper.SetDefault("db.max_idle_conns", 25)
@@ -58,7 +58,7 @@ func InitConfig(logger *otelzap.Logger) Config {
 	viper.SetDefault("smtp.port", "25")
 	viper.SetDefault("smtp.secure", true)
 	viper.SetDefault("smtp.skip_tls_verify", false)
-	viper.SetDefault("smtp.sender", "no-reply@thunderdome.dev")
+	viper.SetDefault("smtp.sender", "no-reply@thunderweb.local")
 	viper.SetDefault("smtp.user", "")
 	viper.SetDefault("smtp.pass", "")
 	viper.SetDefault("smtp.auth", "PLAIN")
@@ -75,7 +75,7 @@ func InitConfig(logger *otelzap.Logger) Config {
 	viper.SetDefault("config.allow_registration", true)
 	viper.SetDefault("config.allow_jira_import", true)
 	viper.SetDefault("config.allow_csv_import", true)
-	viper.SetDefault("config.default_locale", "en")
+	viper.SetDefault("config.default_locale", "pt")
 	viper.SetDefault("config.friendly_ui_verbs", false)
 	viper.SetDefault("config.allow_external_api", true)
 	viper.SetDefault("config.external_api_verify_required", true)

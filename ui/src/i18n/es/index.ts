@@ -52,7 +52,7 @@ const es: Translation = {
   apikeyCopySuccess: 'Clave API copiada en el portapapeles',
   apiKeys: 'Claves API',
   applicationStatsError: 'Error al obtener las estadísticas de la aplicación',
-  appName: 'Thunderdome',
+  appName: 'Thunderweb',
   appPreviewAlt: 'Prévia de Thunderdome, un Planning Poker Ágil con UI',
   appSubtitle: 'Aplicación de código abierto Agile Planning Poker app',
   appVersion: 'versión {version}',

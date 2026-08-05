@@ -49,7 +49,7 @@ import (
 // serveCmd represents the serve command
 var serveCmd = &cobra.Command{
 	Use:   "serve",
-	Short: "Launches the Thunderdome webapp on http://localhost:8080",
+	Short: "Launches the Thunderweb webapp on http://localhost:8080",
 	Run: func(cmd *cobra.Command, args []string) {
 		// Check for --live flag
 		liveFlag, _ := cmd.Flags().GetBool("live")
@@ -157,7 +157,7 @@ func serve(embedUseOS bool) {
 	emailSvc := email.New(&email.Config{
 		AppURL:            "https://" + c.Http.Domain + c.Http.PathPrefix + "/",
 		RepoURL:           repoURL,
-		SenderName:        "Thunderdome",
+		SenderName:        "Thunderweb",
 		SmtpEnabled:       c.Smtp.Enabled,
 		SmtpHost:          c.Smtp.Host,
 		SmtpPort:          c.Smtp.Port,

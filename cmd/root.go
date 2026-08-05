@@ -9,12 +9,12 @@ import (
 
 // This represents the base command when called without any subcommands
 var RootCmd = &cobra.Command{
-	Use:   "thunderdome",
-	Short: "Thunderdome is an open source agile tool suite for remote teams.",
+	Use:   "thunderweb",
+	Short: "Thunderweb is an open source agile tool suite for remote teams.",
 	Long: `To get started run the serve subcommand which will start a server
 on localhost:8080:
 
-    thunderdome serve
+    thunderweb serve
 `,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:

@@ -52,7 +52,7 @@ const fr: Translation = {
   apikeyCopySuccess: 'Clé API copiée dans le presse-papiers',
   apiKeys: 'Clés API',
   applicationStatsError: "Erreur lors de la récupération des statistiques de l'application",
-  appName: 'Thunderdome',
+  appName: 'Thunderweb',
   appPreviewAlt: 'Aperçu de Thunderdome, expérience UI de Poker Planning Agile',
   appSubtitle: 'Application Open Source de Poker Planning Agile',
   appVersion: 'version {version}',

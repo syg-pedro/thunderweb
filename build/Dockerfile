@@ -39,7 +39,7 @@ WORKDIR $GOPATH/src/github.com/stevenweathers/thunderdome-planning-poker/
 # Fetch dependencies.
 RUN go mod download
 # Build the binary
-RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -ldflags="-w -s" -ldflags "-X main.version=$BUILD_VERSION" -o /go/bin/thunderdome
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -installsuffix cgo -ldflags="-w -s" -ldflags "-X main.version=$BUILD_VERSION" -o /go/bin/thunderweb
 ############################
 # STEP 3 build a small image
 ############################
@@ -48,10 +48,12 @@ FROM scratch
 COPY --from=builderGo /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=builderGo /etc/passwd /etc/passwd
 # Copy our static executable
-COPY --from=builderGo /go/bin/thunderdome /go/bin/thunderdome
+COPY --from=builderGo /go/bin/thunderweb /go/bin/thunderweb
 # Use an unprivileged user.
 USER appuser
 
-# Run the thunderdome binary.
-ENTRYPOINT ["/go/bin/thunderdome"]
+EXPOSE 8080
+
+# Run the Thunderweb binary.
+ENTRYPOINT ["/go/bin/thunderweb"]
 CMD ["serve"]

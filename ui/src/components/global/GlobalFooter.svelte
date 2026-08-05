@@ -2,8 +2,6 @@
   import GithubIcon from '../icons/Github.svelte';
   import { AppConfig, appRoutes } from '../../config';
   import LL from '../../i18n/i18n-svelte';
-  import FullLogoVertical from '../logos/FullLogo.svelte';
-  import FullLogoVerticalDarkText from '../logos/FullLogoLight.svelte';
 
   const { AppVersion, RepoURL, PathPrefix, SubscriptionsEnabled } = AppConfig;
   const footerLinkClasses =
@@ -34,12 +32,9 @@
             href={appRoutes.landing}
             class="group flex items-center space-x-3 rtl:space-x-reverse transition-transform duration-300 hover:scale-105"
           >
-            <FullLogoVertical
-              class="hidden h-10 lg:h-12 dark:block transition-all duration-500 grayscale group-hover:grayscale-0 group-hover:drop-shadow-lg"
-            />
-            <FullLogoVerticalDarkText
-              class="h-10 lg:h-12 dark:hidden transition-all duration-500 grayscale group-hover:grayscale-0 group-hover:drop-shadow-lg"
-            />
+            <span class="font-rajdhani text-3xl font-bold tracking-wide text-indigo-600 dark:text-yellow-thunder">
+              Thunderweb
+            </span>
           </a>
 
           <!-- App description or tagline could go here -->

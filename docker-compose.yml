@@ -1,5 +1,5 @@
 services:
-  thunderdome:
+  thunderweb:
     build:
       context: .
       dockerfile: ./build/Dockerfile
@@ -13,27 +13,27 @@ services:
     networks:
       - asgard
     environment:
-      APP_DOMAIN: ".127.0.0.1"
+      APP_DOMAIN: "localhost"
       COOKIE_SECURE: "false"
       SMTP_SECURE: "false"
       SMTP_HOST: mail
       SMTP_PORT: 1025
-      DB_NAME: thunderdome
+      DB_NAME: thunderweb
       DB_USER: thor
       DB_PASS: odinson
     volumes:
-      - ./etc:/etc/thunderdome
+      - ./etc:/etc/thunderweb
   db:
     image: postgres:17
     restart: always
     environment:
-      POSTGRES_DB: thunderdome
+      POSTGRES_DB: thunderweb
       POSTGRES_USER: thor
       POSTGRES_PASSWORD: odinson
     ports:
       - 5432:5432
     volumes:
-      - thunderdome_data:/var/lib/postgresql/data
+      - thunderweb_data:/var/lib/postgresql/data
     networks:
       - asgard
   mail:
@@ -49,4 +49,4 @@ networks:
   asgard:
 
 volumes:
-  thunderdome_data:
+  thunderweb_data:

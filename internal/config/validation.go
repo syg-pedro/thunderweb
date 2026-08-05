@@ -6,7 +6,7 @@ import (
 )
 
 const (
-	defaultHTTPDomain        = "thunderdome.dev"
+	defaultHTTPDomain        = "localhost"
 	defaultHTTPCookieHashkey = "strongest-avenger"
 	defaultConfigAESHashkey  = "therevengers"
 	defaultDBUser            = "thor"

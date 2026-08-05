@@ -1,7 +1,7 @@
 version: '3'
 
 vars:
-  BINARY: '{{ if eq OS "windows" }}thunderdome-planning-poker.exe{{ else }}thunderdome-planning-poker{{ end }}'
+  BINARY: '{{ if eq OS "windows" }}thunderweb.exe{{ else }}thunderweb{{ end }}'
   SWAGGER_DOCS_DIR: docs/swagger
 
 tasks:
@@ -23,9 +23,9 @@ tasks:
 
   clean:
     cmds:
-      - rm -f thunderdome-planning-poker
-      - rm -f thunderdome-planning-poker_unix
-      - rm -f thunderdome-planning-poker.exe
+      - rm -f thunderweb
+      - rm -f thunderweb_unix
+      - rm -f thunderweb.exe
       - rm -rf ui/dist
       - rm -rf release
       - rm -rf {{ .SWAGGER_DOCS_DIR }}
@@ -77,7 +77,7 @@ tasks:
   build-linux:
     deps: [ gen-swag, build-ui ]
     cmds:
-      - CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o thunderdome-planning-poker_unix -v
+      - CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o thunderweb_unix -v
 
   build:
     deps: [ fmt-go, build-ui ]
@@ -99,13 +99,13 @@ tasks:
     cmds:
       - task: build
       - caddy start --config build/dev.caddyfile
-      - SMTP_ENABLED="false" DB_HOST="localhost" APP_DOMAIN="thunderdome.localhost" ./{{.BINARY}}  serve --live
+      - SMTP_ENABLED="false" DB_HOST="localhost" APP_DOMAIN="thunderweb.localhost" ./{{.BINARY}}  serve --live
 
   dev-secure-go:
     cmds:
       - task: build-go
       - caddy start --config build/dev.caddyfile
-      - SMTP_ENABLED="false" DB_HOST="localhost" APP_DOMAIN="thunderdome.localhost" ./{{.BINARY}} serve --live
+      - SMTP_ENABLED="false" DB_HOST="localhost" APP_DOMAIN="thunderweb.localhost" ./{{.BINARY}} serve --live
 
   run:
     cmds:

@@ -52,7 +52,7 @@ const de: Translation = {
   apikeyCopySuccess: 'API-Schlüssel wurde in die Zwischenablage kopiert',
   apiKeys: 'API-Schlüssel',
   applicationStatsError: 'Fehler beim Abrufen der Anwendungsstatistiken',
-  appName: 'Thunderdome',
+  appName: 'Thunderweb',
   appPreviewAlt: 'Vorschau von Thunderdome, Agile Planning Poker UI Experience',
   appSubtitle: 'Open Source Agile Planning Poker App',
   appVersion: 'version {version}',

@@ -9,8 +9,6 @@
   import NavUserMenu from './NavUserMenu.svelte';
   import { ArrowRight, Menu, X } from '@lucide/svelte';
   import LocaleMenu from './LocaleMenu.svelte';
-  import DomeLogo from '../logos/DomeLogo.svelte';
-  import DomeLogoLight from '../logos/DomeLogoLight.svelte';
 
   import type { NotificationService } from '../../types/notifications';
   import type { ApiClient } from '../../types/apiclient';
@@ -100,12 +98,9 @@
       <!-- Logo Section -->
       <div class="flex items-center">
         <a href={appRoutes.landing} class="group flex items-center transition-transform duration-300 hover:scale-105">
-          <DomeLogo
-            class="hidden dark:inline-block h-8 md:h-10 lg:h-12 transition-all duration-300 group-hover:drop-shadow-lg"
-          />
-          <DomeLogoLight
-            class="inline-block dark:hidden h-8 md:h-10 lg:h-12 transition-all duration-300 group-hover:drop-shadow-lg"
-          />
+          <span class="font-rajdhani text-3xl font-bold tracking-wide text-indigo-600 dark:text-yellow-thunder">
+            Thunderweb
+          </span>
         </a>
       </div>
 

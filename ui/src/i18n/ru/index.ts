@@ -52,7 +52,7 @@ const ru: Translation = {
   apikeyCopySuccess: 'API ключ скопирован в буфер обмена',
   apiKeys: 'API ключи',
   applicationStatsError: 'Ошибка получения статистики приложения',
-  appName: 'Thunderdome',
+  appName: 'Thunderweb',
   appPreviewAlt: 'Превью Thunderdome, интерфейс Agile Planning Poker',
   appSubtitle: 'Открытое приложение Agile Planning Poker',
   appVersion: 'Версия {version}',
