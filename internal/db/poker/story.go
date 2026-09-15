@@ -316,6 +316,8 @@ func (d *Service) FinalizeStory(pokerID string, storyID string, points string) (
 			zap.String("PokerID", pokerID),
 			zap.String("StoryID", storyID),
 			zap.String("Points", points))
+
+		return nil, fmt.Errorf("poker finalize story: %w", err)
 	}
 
 	stories := d.GetStories(pokerID, "")
