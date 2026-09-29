@@ -532,9 +532,9 @@
             />
           </div>
         {:else}
-          <div class="flex flex-wrap mb-4 -mx-2 mb-4 lg:mb-6">
+          <div class="flex flex-wrap -mx-1 mb-4 lg:mb-6">
             {#each points as point}
-              <div class="w-1/4 md:w-1/6 px-2 mb-4">
+              <div class="w-1/4 md:w-1/6 px-1 mb-2">
                 <PointCard
                   {point}
                   active={vote === point}
@@ -560,30 +560,8 @@
     </div>
 
     <div class="w-full lg:w-1/4 px-4">
-      <div class="bg-white dark:bg-gray-800 shadow-lg mb-4 rounded-lg">
-        <div class="bg-blue-500 dark:bg-gray-700 p-4 rounded-t-lg">
-          <h3 class="text-3xl text-white leading-tight font-semibold font-rajdhani uppercase">
-            {$LL.warriors()}
-          </h3>
-        </div>
-
-        {#each pokerGame.users as war (war.id)}
-          {#if war.active}
-            <UserCard
-              warrior={war}
-              leaders={pokerGame.leaders}
-              {isFacilitator}
-              voted={didVote(war.id)}
-              points={showVote(war.id)}
-              autoFinishVoting={pokerGame.autoFinishVoting}
-              {sendSocketEvent}
-              {notifications}
-              {gameOver}
-            />
-          {/if}
-        {/each}
-
-        {#if isFacilitator && !gameOver}
+      {#if isFacilitator && !gameOver && pokerGame.activePlanId}
+        <div class="bg-white dark:bg-gray-800 shadow-lg mb-4 rounded-lg">
           <VotingControls
             {points}
             planId={pokerGame.activePlanId}
@@ -591,8 +569,8 @@
             votingLocked={pokerGame.votingLocked}
             highestVote={highestVoteCount}
           />
-        {/if}
-      </div>
+        </div>
+      {/if}
 
       <div class="bg-white dark:bg-gray-800 shadow-lg p-4 mb-4 rounded-lg">
         <InviteUser {hostname} battleId={pokerGame.id} joinCode={pokerGame.joinCode} {notifications} />
@@ -606,7 +584,7 @@
       </div>
 
       {#if isFacilitator}
-        <div class="flex justify-end">
+        <div class="flex justify-end mb-4">
           <SubMenu label={$LL.gameSettings()} icon={Settings} testId="poker-settings">
             {#snippet children({ toggleSubmenu })}
               <SubMenuItem
@@ -642,6 +620,30 @@
           </SubMenu>
         </div>
       {/if}
+
+      <div class="bg-white dark:bg-gray-800 shadow-lg mb-4 rounded-lg">
+        <div class="bg-blue-500 dark:bg-gray-700 p-4 rounded-t-lg">
+          <h3 class="text-3xl text-white leading-tight font-semibold font-rajdhani uppercase">
+            {$LL.warriors()}
+          </h3>
+        </div>
+
+        {#each pokerGame.users as war (war.id)}
+          {#if war.active}
+            <UserCard
+              warrior={war}
+              leaders={pokerGame.leaders}
+              {isFacilitator}
+              voted={didVote(war.id)}
+              points={showVote(war.id)}
+              autoFinishVoting={pokerGame.autoFinishVoting}
+              {sendSocketEvent}
+              {notifications}
+              {gameOver}
+            />
+          {/if}
+        {/each}
+      </div>
     </div>
   </div>
 

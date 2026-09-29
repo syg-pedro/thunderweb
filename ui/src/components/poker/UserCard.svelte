@@ -88,9 +88,9 @@
     />
   </div>
   <div class="w-3/4">
-    <div class="flex items-center">
-      <div class="w-3/4">
-        <p class="{nameStyleClass} font-bold leading-tight truncate dark:text-gray-300" title={warrior.name}>
+    <div class="flex flex-wrap items-center gap-x-2 gap-y-1">
+      <div class="flex-[1_1_8rem] min-w-0">
+        <p class="{nameStyleClass} font-bold leading-tight break-words dark:text-gray-300" title={warrior.name}>
           {#if showRank}
             {#if warrior.rank == 'ADMIN'}
               <Crown class="inline-block text-yellow-500" />
@@ -174,7 +174,7 @@
           {/if}
         {/if}
       </div>
-      <div class="w-1/4 text-right">
+      <div class="shrink-0 text-right">
         {#if !warrior.spectator}
           {#if voted && points === ''}
             <span class="text-green-500 dark:text-lime-400">
@@ -182,8 +182,8 @@
             </span>
           {:else if voted && points !== ''}
             <span
-              class="font-bold text-green-600 dark:text-lime-400 border-green-500 dark:border-lime-500
-                            border p-2 rounded ms-2"
+              class="inline-block whitespace-nowrap text-sm leading-none font-bold text-green-600 dark:text-lime-400
+                            border-green-500 dark:border-lime-500 border px-2 py-1.5 rounded"
               data-testid="user-points"
             >
               {points}
