@@ -276,7 +276,7 @@
             <Badge label={plan.type} testId="plan-type" />
 
             <div class="flex items-center gap-1">
-              {#if plan.referenceId}[{plan.referenceId}]{/if}
+              {#if plan.referenceId && !plan.referenceId.startsWith(`${plan.type}:`)}[{plan.referenceId}]{/if}
               {#if priorities[plan.priority]}
                 {@const SvelteComponent = priorities[plan.priority].icon}
                 <SvelteComponent class="inline-block w-6 h-6" />
@@ -339,7 +339,7 @@
               {plan.type}
             </div>
             &nbsp;
-            {#if plan.referenceId}[{plan.referenceId}]&nbsp;{/if}
+            {#if plan.referenceId && !plan.referenceId.startsWith(`${plan.type}:`)}[{plan.referenceId}]&nbsp;{/if}
             <PriorityIcon class="inline-block w-6 h-6" />
             <span data-testid="plan-name">{plan.name}</span>
           </div>

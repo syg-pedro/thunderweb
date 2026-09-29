@@ -487,7 +487,7 @@
           {#if currentStory.type}
             <Badge label={currentStory.type} testId="currentplan-type" class="text-lg" />
           {/if}
-          {#if currentStory.referenceId}
+          {#if currentStory.referenceId && !currentStory.referenceId.startsWith(`${currentStory.type}:`)}
             <span data-testid="currentplan-refid">[{currentStory.referenceId}]</span>
           {/if}
           <span data-testid="currentplan-name">
