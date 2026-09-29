@@ -91,12 +91,12 @@
   {/if}
   <div
     class="w-full rounded overflow-hidden shadow-lg border {activeColor}
-        {lockedClass} relative text-5xl lg:text-6xl relative z-0 font-rajdhani"
+        {lockedClass} relative text-2xl sm:text-3xl md:text-4xl xl:text-5xl relative z-0 font-rajdhani"
     role="button"
     tabindex="0"
     onclick={voteAction}
     onkeypress={voteAction}
   >
-    <div class="py-12 md:py-16 text-center">{point}</div>
+    <div class="py-6 md:py-8 text-center leading-tight">{point}</div>
   </div>
 </div>
