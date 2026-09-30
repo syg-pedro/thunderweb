@@ -65,9 +65,9 @@ func InitConfig(logger *otelzap.Logger) Config {
 
 	viper.SetDefault("config.aes_hashkey", defaultConfigAESHashkey)
 	viper.SetDefault("config.allowedPointValues",
-		[]string{"1 palito", "2 palitos", "3 palitos", "4 palitos", "5 palitos", "6 palitos", "7 palitos", "8 palitos", "9 palitos", "10 palitos", "?"})
+		[]string{"1 turno", "2 turnos", "3 turnos", "4 turnos", "5 turnos", "6 turnos", "7 turnos", "8 turnos", "9 turnos", "10 turnos", "?"})
 	viper.SetDefault("config.defaultPointValues",
-		[]string{"1 palito", "2 palitos", "3 palitos", "4 palitos", "5 palitos", "6 palitos", "7 palitos", "8 palitos", "9 palitos", "10 palitos", "?"})
+		[]string{"1 turno", "2 turnos", "3 turnos", "4 turnos", "5 turnos", "6 turnos", "7 turnos", "8 turnos", "9 turnos", "10 turnos", "?"})
 	viper.SetDefault("config.show_warrior_rank", false)
 	viper.SetDefault("config.avatar_service", "gravatar")
 	viper.SetDefault("config.toast_timeout", 1000)

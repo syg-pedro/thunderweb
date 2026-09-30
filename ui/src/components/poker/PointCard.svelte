@@ -33,6 +33,13 @@
   );
   let lockedClass = $derived(isLocked ? 'opacity-25 cursor-not-allowed' : 'cursor-pointer');
 
+  const PONTOS_POR_TURNO = 5;
+
+  let pontosDoTurno = $derived.by(() => {
+    const casado = /^\s*(\d{1,2})\s+turnos?\s*$/i.exec(point);
+    return casado ? Number(casado[1]) * PONTOS_POR_TURNO : null;
+  });
+
   function voteAction() {
     if (isLocked) {
       return false;
@@ -97,6 +104,11 @@
     onclick={voteAction}
     onkeypress={voteAction}
   >
-    <div class="py-5 md:py-6 px-1 text-center leading-tight whitespace-nowrap [font-size:min(22cqw,3rem)]">{point}</div>
+    <div class="py-5 md:py-6 px-1 text-center leading-tight whitespace-nowrap">
+      <div class="[font-size:min(22cqw,3rem)]">{point}</div>
+      {#if pontosDoTurno !== null}
+        <div class="opacity-70 [font-size:min(12cqw,1.5rem)]" data-testid="pointCardEquivalencia">= {pontosDoTurno}</div>
+      {/if}
+    </div>
   </div>
 </div>
