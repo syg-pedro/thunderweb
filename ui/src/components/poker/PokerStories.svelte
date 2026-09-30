@@ -2,8 +2,7 @@
   import { dndzone, SHADOW_ITEM_MARKER_PROPERTY_NAME } from 'svelte-dnd-action';
   import HollowButton from '../global/HollowButton.svelte';
   import LL from '../../i18n/i18n-svelte';
-  import { Ban, ChevronDown, ChevronsDown, ChevronsUp, ChevronUp, ExternalLink, Grip } from '@lucide/svelte';
-  import Bars2 from '../icons/Bars2.svelte';
+  import { ExternalLink, Grip } from '@lucide/svelte';
   import AddPlan from './AddStory.svelte';
   import ViewPlan from './ViewStory.svelte';
   import ImportModal from './ImportModal.svelte';
@@ -44,34 +43,34 @@
     priority: 99,
   };
 
-  let priorities = {
+  const priorities: Record<number, { name: string; color: 'gray' | 'solidRed' | 'red' | 'orange' | 'yellow' | 'blue' }> = {
     99: {
       name: '',
-      icon: false,
+      color: 'gray',
     },
     1: {
       name: $LL.planPriorityBlocker(),
-      icon: Ban,
+      color: 'solidRed',
     },
     2: {
       name: $LL.planPriorityHighest(),
-      icon: ChevronsUp,
+      color: 'red',
     },
     3: {
       name: $LL.planPriorityHigh(),
-      icon: ChevronUp,
+      color: 'orange',
     },
     4: {
       name: $LL.planPriorityMedium(),
-      icon: Bars2,
+      color: 'yellow',
     },
     5: {
       name: $LL.planPriorityLow(),
-      icon: ChevronDown,
+      color: 'blue',
     },
     6: {
       name: $LL.planPriorityLowest(),
-      icon: ChevronsDown,
+      color: 'gray',
     },
   };
 
@@ -277,9 +276,14 @@
 
             <div class="flex items-center gap-1">
               {#if plan.referenceId && !plan.referenceId.startsWith(`${plan.type}:`)}[{plan.referenceId}]{/if}
-              {#if priorities[plan.priority]}
-                {@const SvelteComponent = priorities[plan.priority].icon}
-                <SvelteComponent class="inline-block w-6 h-6" />
+              {#if priorities[plan.priority]?.name}
+                <Badge
+                  label={priorities[plan.priority].name}
+                  color={priorities[plan.priority].color}
+                  title={`${$LL.planPriority()}: ${priorities[plan.priority].name}`}
+                  testId="plan-priority"
+                  class="text-sm whitespace-nowrap"
+                />
               {/if}
             </div>
 
@@ -318,7 +322,6 @@
         </div>
       </div>
       {#if plan[SHADOW_ITEM_MARKER_PROPERTY_NAME]}
-        {@const PriorityIcon = priorities[plan.priority].icon}
         <div
           class="opacity-50 absolute top-0 left-0 right-0 bottom-0 visible opacity-50 cursor-pointer flex items-center border-b border-gray-300 dark:border-gray-700 p-4 bg-white dark:bg-gray-800"
           data-testid="plan"
@@ -340,7 +343,14 @@
             </div>
             &nbsp;
             {#if plan.referenceId && !plan.referenceId.startsWith(`${plan.type}:`)}[{plan.referenceId}]&nbsp;{/if}
-            <PriorityIcon class="inline-block w-6 h-6" />
+            {#if priorities[plan.priority]?.name}
+              <Badge
+                label={priorities[plan.priority].name}
+                color={priorities[plan.priority].color}
+                class="text-sm whitespace-nowrap"
+              />
+              &nbsp;
+            {/if}
             <span data-testid="plan-name">{plan.name}</span>
           </div>
           <div class="lg:flex-none text-right">

@@ -1,8 +1,8 @@
 <script lang="ts">
   import Modal from '../global/Modal.svelte';
   import LL from '../../i18n/i18n-svelte';
-  import { Ban, ChevronDown, ChevronsDown, ChevronsUp, ChevronUp, ExternalLink } from '@lucide/svelte';
-  import Bars2 from '../icons/Bars2.svelte';
+  import { ExternalLink } from '@lucide/svelte';
+  import Badge from '../global/Badge.svelte';
 
   interface Props {
     togglePlanView?: any;
@@ -26,34 +26,34 @@
     priority = 99,
   }: Props = $props();
 
-  const priorities = {
+  const priorities: Record<number, { name: string; color: 'gray' | 'solidRed' | 'red' | 'orange' | 'yellow' | 'blue' }> = {
     99: {
       name: '',
-      icon: false,
+      color: 'gray',
     },
     1: {
       name: $LL.planPriorityBlocker(),
-      icon: Ban,
+      color: 'solidRed',
     },
     2: {
       name: $LL.planPriorityHighest(),
-      icon: ChevronsUp,
+      color: 'red',
     },
     3: {
       name: $LL.planPriorityHigh(),
-      icon: ChevronUp,
+      color: 'orange',
     },
     4: {
       name: $LL.planPriorityMedium(),
-      icon: Bars2,
+      color: 'yellow',
     },
     5: {
       name: $LL.planPriorityLow(),
-      icon: ChevronDown,
+      color: 'blue',
     },
     6: {
       name: $LL.planPriorityLowest(),
-      icon: ChevronsDown,
+      color: 'gray',
     },
   };
 </script>
@@ -90,12 +90,13 @@
       </a>
     {/if}
   </div>
-  {@const SvelteComponent = priorities[priority].icon}
   <div class="mb-4 dark:text-white">
     <div class="font-bold mb-2 dark:text-gray-400">
       {$LL.planPriority()}
     </div>
-    <SvelteComponent class="inline-block w-6 h-6" />{priorities[priority].name}
+    {#if priorities[priority]?.name}
+      <Badge label={priorities[priority].name} color={priorities[priority].color} class="text-sm" />
+    {/if}
   </div>
   <div class="mb-4">
     <div class="font-bold mb-2 dark:text-gray-400">
