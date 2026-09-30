@@ -29,6 +29,7 @@
   import Badge from '../../components/global/Badge.svelte';
   import EndStatusBadge from '../../components/global/EndStatusBadge.svelte';
   import EndGameModal from '../../components/poker/EndGameModal.svelte';
+  import ViewStory from '../../components/poker/ViewStory.svelte';
 
   interface Props {
     battleId: string;
@@ -89,6 +90,7 @@
   let isSpectator: boolean = $state(false);
   let voteStartTime: Date = $state(new Date());
   let showEndGameModal: boolean = $state(false);
+  let showActivatedStory: boolean = $state(false);
   let gameOver: boolean = $derived(typeof pokerGame.endTime !== 'undefined' && pokerGame.endTime !== null);
 
   let ws: any;
@@ -173,10 +175,12 @@
         pokerGame.activePlanId = activePlan.id;
         pokerGame.votingLocked = false;
         vote = '';
+        showActivatedStory = true;
         break;
       case 'plan_skipped':
         const updatedPlans2 = JSON.parse(parsedEvent.value);
         currentStory = { ...defaultStory };
+        showActivatedStory = false;
         pokerGame.plans = updatedPlans2;
         pokerGame.activePlanId = '';
         pokerGame.votingLocked = true;
@@ -219,6 +223,7 @@
         pokerGame.plans = JSON.parse(parsedEvent.value);
         pokerGame.activePlanId = '';
         currentStory = { ...defaultStory };
+        showActivatedStory = false;
         vote = '';
         break;
       case 'plan_revised':
@@ -662,6 +667,19 @@
       teamId={pokerGame.teamId}
       {notifications}
       {xfetch}
+    />
+  {/if}
+
+  {#if showActivatedStory && currentStory.id}
+    <ViewStory
+      togglePlanView={() => (showActivatedStory = false)}
+      planName={currentStory.name}
+      planType={currentStory.type}
+      referenceId={currentStory.referenceId}
+      planLink={currentStory.link}
+      description={currentStory.description}
+      acceptanceCriteria={currentStory.acceptanceCriteria}
+      priority={currentStory.priority}
     />
   {/if}
 
