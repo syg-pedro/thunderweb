@@ -131,8 +131,8 @@ func (d *Service) CreateGame(ctx context.Context, facilitatorID string, name str
 			story.Type,
 			story.ReferenceID,
 			story.Link,
-			story.Description,
-			story.AcceptanceCriteria,
+			d.HTMLSanitizerPolicy.Sanitize(story.Description),
+			d.HTMLSanitizerPolicy.Sanitize(story.AcceptanceCriteria),
 			priority,
 		).Scan(&story.ID)
 		if e != nil {
@@ -255,8 +255,8 @@ func (d *Service) TeamCreateGame(ctx context.Context, teamID string, facilitator
 			story.Type,
 			story.ReferenceID,
 			story.Link,
-			story.Description,
-			story.AcceptanceCriteria,
+			d.HTMLSanitizerPolicy.Sanitize(story.Description),
+			d.HTMLSanitizerPolicy.Sanitize(story.AcceptanceCriteria),
 			priority,
 		).Scan(&story.ID)
 		if e != nil {
