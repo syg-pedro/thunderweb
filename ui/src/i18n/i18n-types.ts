@@ -2738,6 +2738,30 @@ type RootTranslation = {
 	 */
 	imageCounter: RequiredParams<'current' | 'total'>
 	/**
+	 * L​o​a​d​i​n​g​ ​t​h​e​ ​d​e​s​c​r​i​p​t​i​o​n​ ​a​n​d​ ​c​o​m​m​e​n​t​s​ ​f​r​o​m​ ​A​c​e​l​e​r​a​t​o​.​.​.
+	 */
+	storyContentLoading: string
+	/**
+	 * S​i​g​n​ ​i​n​ ​t​o​ ​a​c​e​l​e​r​a​w​e​b​ ​t​o​ ​s​e​e​ ​t​h​e​ ​u​p​-​t​o​-​d​a​t​e​ ​d​e​s​c​r​i​p​t​i​o​n​ ​a​n​d​ ​c​o​m​m​e​n​t​s​ ​f​r​o​m​ ​A​c​e​l​e​r​a​t​o​.
+	 */
+	storyContentLoginRequired: string
+	/**
+	 * S​i​g​n​ ​i​n​ ​t​o​ ​a​c​e​l​e​r​a​w​e​b
+	 */
+	storyContentLogin: string
+	/**
+	 * C​o​u​l​d​ ​n​o​t​ ​l​o​a​d​ ​t​h​e​ ​u​p​-​t​o​-​d​a​t​e​ ​d​e​s​c​r​i​p​t​i​o​n​.​ ​S​h​o​w​i​n​g​ ​t​h​e​ ​s​u​m​m​a​r​y​ ​s​a​v​e​d​ ​i​n​ ​t​h​e​ ​g​a​m​e​.
+	 */
+	storyContentError: string
+	/**
+	 * C​o​m​m​e​n​t​s
+	 */
+	storyComments: string
+	/**
+	 * N​o​ ​c​o​m​m​e​n​t​s​.
+	 */
+	storyNoComments: string
+	/**
 	 * S​t​o​r​y​b​o​a​r​d​ ​C​o​l​u​m​n​ ​S​e​t​t​i​n​g​s
 	 */
 	modalStoryboardColumnSettings: string
@@ -5760,6 +5784,30 @@ export type TranslationFunctions = {
 	 * {current} of {total}
 	 */
 	imageCounter: (arg: { current: unknown, total: unknown }) => LocalizedString
+	/**
+	 * Loading the description and comments from Acelerato...
+	 */
+	storyContentLoading: () => LocalizedString
+	/**
+	 * Sign in to aceleraweb to see the up-to-date description and comments from Acelerato.
+	 */
+	storyContentLoginRequired: () => LocalizedString
+	/**
+	 * Sign in to aceleraweb
+	 */
+	storyContentLogin: () => LocalizedString
+	/**
+	 * Could not load the up-to-date description. Showing the summary saved in the game.
+	 */
+	storyContentError: () => LocalizedString
+	/**
+	 * Comments
+	 */
+	storyComments: () => LocalizedString
+	/**
+	 * No comments.
+	 */
+	storyNoComments: () => LocalizedString
 	/**
 	 * Storyboard Column Settings
 	 */

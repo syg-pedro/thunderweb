@@ -28,6 +28,7 @@ type AppConfig struct {
 	AllowJiraImport             bool
 	AllowCsvImport              bool
 	DefaultLocale               string
+	AcelerawebURL               string
 	OrganizationsEnabled        bool
 	AppVersion                  string
 	CookieName                  string

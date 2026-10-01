@@ -4,6 +4,7 @@
   import { ExternalLink } from '@lucide/svelte';
   import Badge from '../global/Badge.svelte';
   import ImageViewer from '../global/ImageViewer.svelte';
+  import StoryAceleratoContent from './StoryAceleratoContent.svelte';
 
   interface Props {
     togglePlanView?: any;
@@ -31,6 +32,7 @@
   let viewerImages: Array<{ src: string; alt?: string }> = $state([]);
   let viewerIndex = $state(0);
   let showViewer = $state(false);
+  let contentVersion = $state(0);
 
   function contentImages(): HTMLImageElement[] {
     return contentElement ? Array.from(contentElement.querySelectorAll('img')) : [];
@@ -39,6 +41,7 @@
   $effect(() => {
     void description;
     void acceptanceCriteria;
+    void contentVersion;
     contentImages().forEach(img => {
       img.tabIndex = 0;
       img.setAttribute('role', 'button');
@@ -146,9 +149,7 @@
     <div class="font-bold mb-2 dark:text-gray-400">
       {$LL.planDescription()}
     </div>
-    <div class="unreset dark:text-white">
-      {@html description}
-    </div>
+    <StoryAceleratoContent {referenceId} fallbackDescription={description} onContentChange={() => contentVersion++} />
   </div>
   <div class="mb-4">
     <div class="font-bold mb-2 dark:text-gray-400">

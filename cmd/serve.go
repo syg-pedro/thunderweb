@@ -278,6 +278,7 @@ func serve(embedUseOS bool) {
 				AllowJiraImport:             c.Config.AllowJiraImport,
 				AllowCsvImport:              c.Config.AllowCsvImport,
 				DefaultLocale:               c.Config.DefaultLocale,
+				AcelerawebURL:               c.Config.AcelerawebURL,
 				OrganizationsEnabled:        c.Config.OrganizationsEnabled,
 				ExternalAPIEnabled:          c.Config.AllowExternalApi,
 				UserAPIKeyLimit:             c.Config.UserApikeyLimit,

@@ -89,6 +89,7 @@ type AppConfig struct {
 	AllowJiraImport             bool     `mapstructure:"allow_jira_import"`
 	AllowCsvImport              bool     `mapstructure:"allow_csv_import"`
 	DefaultLocale               string   `mapstructure:"default_locale"`
+	AcelerawebURL               string   `mapstructure:"aceleraweb_url"`
 	AllowExternalApi            bool     `mapstructure:"allow_external_api"`
 	ExternalApiVerifyRequired   bool     `mapstructure:"external_api_verify_required"`
 	UserApikeyLimit             int      `mapstructure:"user_apikey_limit"`

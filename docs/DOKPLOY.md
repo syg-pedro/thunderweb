@@ -28,6 +28,11 @@ DB_PASS=substitua-pela-senha-do-banco
 DB_SSLMODE=disable
 
 SMTP_ENABLED=false
+
+# Endereço do aceleraweb (sem barra final). O modal da história busca a descrição
+# e os comentários do Acelerato em /api/tickets/{ticket}/conteudo com a sessão de
+# quem está vendo. Vazio mostra só o resumo gravado no jogo.
+CONFIG_ACELERAWEB_URL=https://aceleraweb.seu-dominio.com
 ```
 
 Antes de liberar cadastro por e-mail, configure SMTP e mude `SMTP_ENABLED` para `true`. Gere as duas chaves com `openssl rand -hex 32` e guarde-as apenas nas variáveis protegidas do Dokploy.
