@@ -364,3 +364,19 @@ func TestContainsLink(t *testing.T) {
 		})
 	}
 }
+
+func TestOriginOf(t *testing.T) {
+	cases := []struct{ input, expected string }{
+		{"https://aceleraweb.staging.sygecom.com.br", "https://aceleraweb.staging.sygecom.com.br"},
+		{"https://aceleraweb.staging.sygecom.com.br/", "https://aceleraweb.staging.sygecom.com.br"},
+		{" https://aceleraweb.example.com:8443/api/tickets ", "https://aceleraweb.example.com:8443"},
+		{"", ""},
+		{"aceleraweb.example.com", ""},
+	}
+
+	for _, tc := range cases {
+		if got := originOf(tc.input); got != tc.expected {
+			t.Errorf("originOf(%q) = %q, expected %q", tc.input, got, tc.expected)
+		}
+	}
+}

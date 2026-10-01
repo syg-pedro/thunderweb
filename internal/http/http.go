@@ -50,6 +50,9 @@ func New(apiService Service, FSS fs.FS, HFS http.FileSystem) *Service {
 		"'self'",
 		getWebsocketConnectSrc(a.Config.SecureProtocol, a.Config.WebsocketSubdomain, a.Config.AppDomain),
 	}
+	if acelerawebOrigin := originOf(a.Config.AcelerawebURL); acelerawebOrigin != "" {
+		connectSrcCsp = append(connectSrcCsp, acelerawebOrigin)
+	}
 
 	// Content Security Policy
 	cspBuilder := cspbuilder.Builder{

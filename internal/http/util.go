@@ -9,6 +9,7 @@ import (
 	"html/template"
 	"io/fs"
 	"net/http"
+	"net/url"
 	"regexp"
 	"strconv"
 	"strings"
@@ -345,6 +346,15 @@ func (s *Service) getIndexTemplate(filesystem fs.FS) *template.Template {
 	}
 
 	return tmpl
+}
+
+func originOf(rawURL string) string {
+	parsed, err := url.Parse(strings.TrimSpace(rawURL))
+	if err != nil || parsed.Scheme == "" || parsed.Host == "" {
+		return ""
+	}
+
+	return fmt.Sprintf("%s://%s", parsed.Scheme, parsed.Host)
 }
 
 func getWebsocketConnectSrc(secureProtocol bool, websocketSubdomain string, appDomain string) string {

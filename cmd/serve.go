@@ -215,6 +215,7 @@ func serve(embedUseOS bool) {
 			AuthHeaderEmailHeader:     c.Auth.Header.EmailHeader,
 			AllowGuests:               c.Config.AllowGuests,
 			AllowRegistration:         c.Config.AllowRegistration,
+			AcelerawebURL:             c.Config.AcelerawebURL,
 			ShowActiveCountries:       c.Config.ShowActiveCountries,
 			SubscriptionsEnabled:      c.Config.SubscriptionsEnabled,
 			GoogleAuth: http.AuthProvider{

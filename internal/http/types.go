@@ -98,6 +98,7 @@ type Config struct {
 	AuthHeaderEmailHeader     string
 	AllowGuests               bool
 	AllowRegistration         bool
+	AcelerawebURL             string
 	ShowActiveCountries       bool
 	SubscriptionsEnabled      bool
 
