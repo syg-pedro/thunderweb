@@ -15,6 +15,7 @@ import (
 )
 
 const maxJSONRequestBodyBytes = int64(65536)
+const maxGameCreateRequestBodyBytes = int64(10 << 20)
 
 func (s *Service) panicRecovery(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -36,7 +37,7 @@ func (s *Service) requestBodyLimit(h http.Handler, prefix string) http.Handler {
 			return
 		}
 
-		limitedBody := http.MaxBytesReader(w, r.Body, maxJSONRequestBodyBytes)
+		limitedBody := http.MaxBytesReader(w, r.Body, requestBodyLimitFor(r))
 		defer limitedBody.Close()
 
 		body, err := io.ReadAll(limitedBody)
@@ -54,6 +55,14 @@ func (s *Service) requestBodyLimit(h http.Handler, prefix string) http.Handler {
 		r.Body = io.NopCloser(bytes.NewReader(body))
 		h.ServeHTTP(w, r)
 	})
+}
+
+func requestBodyLimitFor(r *http.Request) int64 {
+	if r.Method == http.MethodPost && strings.HasSuffix(r.URL.Path, "/battles") {
+		return maxGameCreateRequestBodyBytes
+	}
+
+	return maxJSONRequestBodyBytes
 }
 
 func shouldLimitJSONRequestBody(r *http.Request, prefix string) bool {

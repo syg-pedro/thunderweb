@@ -362,6 +362,37 @@ func TestRequestBodyLimitRejectsOversizedJSONRequests(t *testing.T) {
 	require.Equal(t, "REQUEST_TOO_LARGE", response.Error)
 }
 
+func TestRequestBodyLimitAllowsLargerGameCreation(t *testing.T) {
+	service := &Service{}
+	nextCalled := false
+	handler := service.requestBodyLimit(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		nextCalled = true
+		w.WriteHeader(http.StatusNoContent)
+	}), "")
+
+	req := httptest.NewRequest(http.MethodPost, "/api/users/123/battles", bytes.NewReader(bytes.Repeat([]byte("a"), int(maxJSONRequestBodyBytes)*4)))
+	rr := httptest.NewRecorder()
+
+	handler.ServeHTTP(rr, req)
+
+	require.True(t, nextCalled)
+	require.Equal(t, http.StatusNoContent, rr.Code)
+}
+
+func TestRequestBodyLimitRejectsOversizedGameCreation(t *testing.T) {
+	service := &Service{}
+	handler := service.requestBodyLimit(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusNoContent)
+	}), "")
+
+	req := httptest.NewRequest(http.MethodPost, "/api/users/123/battles", bytes.NewReader(bytes.Repeat([]byte("a"), int(maxGameCreateRequestBodyBytes)+1)))
+	rr := httptest.NewRecorder()
+
+	handler.ServeHTTP(rr, req)
+
+	require.Equal(t, http.StatusRequestEntityTooLarge, rr.Code)
+}
+
 func TestRequestBodyLimitPreservesNormalSizedJSONRequests(t *testing.T) {
 	service := &Service{}
 	expectedBody := `{"email":"user@example.com","password":"secret123"}`
