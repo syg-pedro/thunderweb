@@ -227,11 +227,11 @@ type RootTranslation = {
 	 */
 	applicationStatsError: string
 	/**
-	 * T​h​u​n​d​e​r​d​o​m​e
+	 * T​h​u​n​d​e​r​w​e​b
 	 */
 	appName: string
 	/**
-	 * P​r​e​v​i​e​w​ ​o​f​ ​T​h​u​n​d​e​r​d​o​m​e​,​ ​A​g​i​l​e​ ​P​l​a​n​n​i​n​g​ ​P​o​k​e​r​ ​U​I​ ​E​x​p​e​r​i​e​n​c​e
+	 * P​r​e​v​i​e​w​ ​o​f​ ​T​h​u​n​d​e​r​w​e​b​,​ ​A​g​i​l​e​ ​P​l​a​n​n​i​n​g​ ​P​o​k​e​r​ ​U​I​ ​E​x​p​e​r​i​e​n​c​e
 	 */
 	appPreviewAlt: string
 	/**
@@ -881,7 +881,7 @@ type RootTranslation = {
 	 */
 	landingSalesPitch: string
 	/**
-	 * T​h​u​n​d​e​r​d​o​m​e​ ​i​s​ ​a​n​ ​A​g​i​l​e​ ​P​l​a​n​n​i​n​g​ ​P​o​k​e​r​ ​a​p​p
+	 * T​h​u​n​d​e​r​w​e​b​ ​i​s​ ​a​n​ ​A​g​i​l​e​ ​P​l​a​n​n​i​n​g​ ​P​o​k​e​r​ ​a​p​p
 	 */
 	landingTitle: string
 	/**
@@ -2704,6 +2704,40 @@ type RootTranslation = {
 	 */
 	modalViewPokerStory: string
 	/**
+	 * I​m​a​g​e​ ​v​i​e​w​e​r
+	 */
+	imageViewer: string
+	/**
+	 * Z​o​o​m​ ​i​n
+	 */
+	imageZoomIn: string
+	/**
+	 * Z​o​o​m​ ​o​u​t
+	 */
+	imageZoomOut: string
+	/**
+	 * R​e​s​e​t​ ​z​o​o​m
+	 */
+	imageZoomReset: string
+	/**
+	 * P​r​e​v​i​o​u​s​ ​i​m​a​g​e
+	 */
+	imagePrevious: string
+	/**
+	 * N​e​x​t​ ​i​m​a​g​e
+	 */
+	imageNext: string
+	/**
+	 * O​p​e​n​ ​o​r​i​g​i​n​a​l​ ​i​m​a​g​e
+	 */
+	imageOpenOriginal: string
+	/**
+	 * {​c​u​r​r​e​n​t​}​ ​o​f​ ​{​t​o​t​a​l​}
+	 * @param {unknown} current
+	 * @param {unknown} total
+	 */
+	imageCounter: RequiredParams<'current' | 'total'>
+	/**
 	 * S​t​o​r​y​b​o​a​r​d​ ​C​o​l​u​m​n​ ​S​e​t​t​i​n​g​s
 	 */
 	modalStoryboardColumnSettings: string
@@ -3257,11 +3291,11 @@ export type TranslationFunctions = {
 	 */
 	applicationStatsError: () => LocalizedString
 	/**
-	 * Thunderdome
+	 * Thunderweb
 	 */
 	appName: () => LocalizedString
 	/**
-	 * Preview of Thunderdome, Agile Planning Poker UI Experience
+	 * Preview of Thunderweb, Agile Planning Poker UI Experience
 	 */
 	appPreviewAlt: () => LocalizedString
 	/**
@@ -3901,7 +3935,7 @@ export type TranslationFunctions = {
 	 */
 	landingSalesPitch: () => LocalizedString
 	/**
-	 * Thunderdome is an Agile Planning Poker app
+	 * Thunderweb is an Agile Planning Poker app
 	 */
 	landingTitle: () => LocalizedString
 	/**
@@ -5694,6 +5728,38 @@ export type TranslationFunctions = {
 	 * View Poker Story
 	 */
 	modalViewPokerStory: () => LocalizedString
+	/**
+	 * Image viewer
+	 */
+	imageViewer: () => LocalizedString
+	/**
+	 * Zoom in
+	 */
+	imageZoomIn: () => LocalizedString
+	/**
+	 * Zoom out
+	 */
+	imageZoomOut: () => LocalizedString
+	/**
+	 * Reset zoom
+	 */
+	imageZoomReset: () => LocalizedString
+	/**
+	 * Previous image
+	 */
+	imagePrevious: () => LocalizedString
+	/**
+	 * Next image
+	 */
+	imageNext: () => LocalizedString
+	/**
+	 * Open original image
+	 */
+	imageOpenOriginal: () => LocalizedString
+	/**
+	 * {current} of {total}
+	 */
+	imageCounter: (arg: { current: unknown, total: unknown }) => LocalizedString
 	/**
 	 * Storyboard Column Settings
 	 */

@@ -3,6 +3,7 @@
   import LL from '../../i18n/i18n-svelte';
   import { ExternalLink } from '@lucide/svelte';
   import Badge from '../global/Badge.svelte';
+  import ImageViewer from '../global/ImageViewer.svelte';
 
   interface Props {
     togglePlanView?: any;
@@ -25,6 +26,42 @@
     acceptanceCriteria = '',
     priority = 99,
   }: Props = $props();
+
+  let contentElement: HTMLElement | undefined = $state();
+  let viewerImages: Array<{ src: string; alt?: string }> = $state([]);
+  let viewerIndex = $state(0);
+  let showViewer = $state(false);
+
+  function contentImages(): HTMLImageElement[] {
+    return contentElement ? Array.from(contentElement.querySelectorAll('img')) : [];
+  }
+
+  $effect(() => {
+    void description;
+    void acceptanceCriteria;
+    contentImages().forEach(img => {
+      img.tabIndex = 0;
+      img.setAttribute('role', 'button');
+      img.setAttribute('aria-label', img.alt || $LL.imageViewer());
+    });
+  });
+
+  function openImage(target: EventTarget | null) {
+    if (!(target instanceof HTMLImageElement)) return false;
+    const images = contentImages();
+    viewerImages = images.map(img => ({ src: img.currentSrc || img.src, alt: img.alt }));
+    viewerIndex = Math.max(0, images.indexOf(target));
+    showViewer = true;
+    return true;
+  }
+
+  function handleContentClick(e: MouseEvent) {
+    if (openImage(e.target)) e.preventDefault();
+  }
+
+  function handleContentKeydown(e: KeyboardEvent) {
+    if ((e.key === 'Enter' || e.key === ' ') && openImage(e.target)) e.preventDefault();
+  }
 
   const priorities: Record<number, { name: string; color: 'gray' | 'solidRed' | 'red' | 'orange' | 'yellow' | 'blue' }> = {
     99: {
@@ -98,6 +135,13 @@
       <Badge label={priorities[priority].name} color={priorities[priority].color} class="text-sm" />
     {/if}
   </div>
+  <!-- svelte-ignore a11y_no_static_element_interactions -->
+  <div
+    bind:this={contentElement}
+    onclick={handleContentClick}
+    onkeydown={handleContentKeydown}
+    class="[&_img]:cursor-zoom-in [&_img]:rounded [&_img:focus-visible]:outline [&_img:focus-visible]:outline-2 [&_img:focus-visible]:outline-sky-400"
+  >
   <div class="mb-4">
     <div class="font-bold mb-2 dark:text-gray-400">
       {$LL.planDescription()}
@@ -114,4 +158,9 @@
       {@html acceptanceCriteria}
     </div>
   </div>
+  </div>
+
+  {#if showViewer}
+    <ImageViewer images={viewerImages} startIndex={viewerIndex} close={() => (showViewer = false)} />
+  {/if}
 </Modal>
