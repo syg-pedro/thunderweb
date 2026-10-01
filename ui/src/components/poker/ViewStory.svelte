@@ -98,7 +98,12 @@
   };
 </script>
 
-<Modal closeModal={togglePlanView} widthClasses="md:w-2/3 lg:w-3/5" ariaLabel={$LL.modalViewPokerStory()}>
+<Modal
+  closeModal={togglePlanView}
+  widthClasses="md:w-2/3 lg:w-3/5"
+  ariaLabel={$LL.modalViewPokerStory()}
+  closeOnBackdrop
+>
   <div class="mb-4 dark:text-white">
     <div class="font-bold mb-2 dark:text-gray-400">
       {$LL.planType()}

@@ -10,6 +10,7 @@
     ariaLabel?: string;
     ariaLabelledby?: string;
     ariaDescribedby?: string;
+    closeOnBackdrop?: boolean;
   }
 
   let {
@@ -19,6 +20,7 @@
     ariaLabel,
     ariaLabelledby,
     ariaDescribedby,
+    closeOnBackdrop = false,
   }: Props = $props();
 
   const handle_keydown = (e: KeyboardEvent) => {
@@ -26,6 +28,18 @@
   };
 
   let modalElement: HTMLElement;
+  let pressStartedOutside = false;
+
+  const isOutside = (target: EventTarget | null) => !(target instanceof Node && modalElement.contains(target));
+
+  const handleBackdropPointerDown = (e: PointerEvent) => {
+    pressStartedOutside = closeOnBackdrop && isOutside(e.target);
+  };
+
+  const handleBackdropClick = (e: MouseEvent) => {
+    if (pressStartedOutside && isOutside(e.target)) closeModal();
+    pressStartedOutside = false;
+  };
   let focusTrap: any;
 
   onMount(() => {
@@ -41,7 +55,12 @@
 
 <svelte:window on:keydown|once={handle_keydown} />
 
-<div class="fixed z-50 inset-0 flex items-center z-40 max-h-screen overflow-y-scroll">
+<!-- svelte-ignore a11y_click_events_have_key_events, a11y_no_static_element_interactions -->
+<div
+  class="fixed z-50 inset-0 flex items-center z-40 max-h-screen overflow-y-scroll"
+  onpointerdown={handleBackdropPointerDown}
+  onclick={handleBackdropClick}
+>
   <!-- Background overlay -->
   <div class="fixed inset-0 bg-gray-900 opacity-75" aria-hidden="true"></div>
 
