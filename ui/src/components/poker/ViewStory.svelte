@@ -34,6 +34,39 @@
   let showViewer = $state(false);
   let contentVersion = $state(0);
 
+  type BadgeColor = 'gray' | 'blue' | 'red' | 'green' | 'orange' | 'yellow';
+
+  const summary = $derived(parseSummary(description));
+
+  function parseSummary(text: string): Array<{ label: string; value: string }> | null {
+    const lines = text
+      .split('\n')
+      .map(line => line.trim())
+      .filter(Boolean);
+    if (!lines[0]?.startsWith('Ticket: ') || !lines.every(line => /^[^:<]+: \S/.test(line))) return null;
+    return lines.map(line => {
+      const index = line.indexOf(': ');
+      return { label: line.slice(0, index), value: line.slice(index + 2) };
+    });
+  }
+
+  function normalize(value: string): string {
+    return value.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase();
+  }
+
+  function statusColor(status: string): BadgeColor {
+    const name = normalize(status);
+    if (/retorno|retrabalho|impedid|bloquead/.test(name)) return 'red';
+    if (/conclu|finaliz|entregue/.test(name)) return 'green';
+    if (/backlog|cancel/.test(name)) return 'gray';
+    if (/aguardando/.test(name)) return 'yellow';
+    return 'blue';
+  }
+
+  function effortColor(effort: string): BadgeColor {
+    return Number(effort) > 0 ? 'green' : 'orange';
+  }
+
   function contentImages(): HTMLImageElement[] {
     return contentElement ? Array.from(contentElement.querySelectorAll('img')) : [];
   }
@@ -49,10 +82,15 @@
     });
   });
 
+  function fullImageSrc(img: HTMLImageElement): string {
+    const link = img.closest('a[rel="image"], a.image') as HTMLAnchorElement | null;
+    return link?.href || img.currentSrc || img.src;
+  }
+
   function openImage(target: EventTarget | null) {
     if (!(target instanceof HTMLImageElement)) return false;
     const images = contentImages();
-    viewerImages = images.map(img => ({ src: img.currentSrc || img.src, alt: img.alt }));
+    viewerImages = images.map(img => ({ src: fullImageSrc(img), alt: img.alt }));
     viewerIndex = Math.max(0, images.indexOf(target));
     showViewer = true;
     return true;
@@ -143,6 +181,22 @@
       <Badge label={priorities[priority].name} color={priorities[priority].color} class="text-sm" />
     {/if}
   </div>
+  {#if summary}
+    <dl class="mb-4 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 items-center dark:text-white">
+      {#each summary as item, i (i)}
+        <dt class="font-bold dark:text-gray-400">{item.label}</dt>
+        <dd>
+          {#if item.label === 'Status'}
+            <Badge label={item.value} color={statusColor(item.value)} class="text-sm" />
+          {:else if item.label === 'Esforço atual'}
+            <Badge label={item.value} color={effortColor(item.value)} class="text-sm" />
+          {:else}
+            {item.value}
+          {/if}
+        </dd>
+      {/each}
+    </dl>
+  {/if}
   <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div
     bind:this={contentElement}
@@ -154,7 +208,7 @@
     <div class="font-bold mb-2 dark:text-gray-400">
       {$LL.planDescription()}
     </div>
-    <StoryAceleratoContent {referenceId} fallbackDescription={description} onContentChange={() => contentVersion++} />
+    <StoryAceleratoContent {referenceId} fallbackDescription={summary ? '' : description} onContentChange={() => contentVersion++} />
   </div>
   <div class="mb-4">
     <div class="font-bold mb-2 dark:text-gray-400">
