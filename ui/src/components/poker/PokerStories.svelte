@@ -20,6 +20,7 @@
     xfetch: ApiClient;
     gameId?: string;
     gameOver?: boolean;
+    activePlanId?: string;
   }
 
   let {
@@ -30,6 +31,7 @@
     xfetch,
     gameId = '',
     gameOver = false,
+    activePlanId = '',
   }: Props = $props();
 
   let defaultPlan = {
@@ -79,6 +81,11 @@
   let selectedPlan = $state({ ...defaultPlan });
   let storysShow = $state('unpointed');
   let showImport = $state(false);
+
+  $effect(() => {
+    void activePlanId;
+    showViewPlan = false;
+  });
 
   $effect(() => {
     if (gameOver) {

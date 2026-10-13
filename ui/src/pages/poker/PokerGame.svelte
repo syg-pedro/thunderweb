@@ -561,6 +561,7 @@
         {xfetch}
         gameId={pokerGame.id}
         {gameOver}
+        activePlanId={pokerGame.activePlanId}
       />
     </div>
 
@@ -671,16 +672,18 @@
   {/if}
 
   {#if showActivatedStory && currentStory.id}
-    <ViewStory
-      togglePlanView={() => (showActivatedStory = false)}
-      planName={currentStory.name}
-      planType={currentStory.type}
-      referenceId={currentStory.referenceId}
-      planLink={currentStory.link}
-      description={currentStory.description}
-      acceptanceCriteria={currentStory.acceptanceCriteria}
-      priority={currentStory.priority}
-    />
+    {#key currentStory.id}
+      <ViewStory
+        togglePlanView={() => (showActivatedStory = false)}
+        planName={currentStory.name}
+        planType={currentStory.type}
+        referenceId={currentStory.referenceId}
+        planLink={currentStory.link}
+        description={currentStory.description}
+        acceptanceCriteria={currentStory.acceptanceCriteria}
+        priority={currentStory.priority}
+      />
+    {/key}
   {/if}
 
   {#if showEndGameModal}
