@@ -46,6 +46,7 @@
     focusTrap = createFocusTrap(modalElement, {
       escapeDeactivates: false, // Handle escape separately
       returnFocusOnDeactivate: true,
+      allowOutsideClick: () => closeOnBackdrop,
     });
     focusTrap.activate();
 
